@@ -2,7 +2,7 @@
 Connor Abdelnoor & Kyle Giard-Chase
 
 ##Date
-March 13 2015
+March 17 2015
 
 ##Description
 This To Do List app will let you sort out your life by creating a to do list.
