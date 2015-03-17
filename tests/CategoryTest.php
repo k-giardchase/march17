@@ -6,6 +6,7 @@
     */
 
     require_once "src/Category.php";
+    require_once "src/Task.php";
 
     $DB = new PDO('pgsql:host=localhost;dbname=to_do_test');
 
@@ -14,6 +15,7 @@
         protected function tearDown()
         {
             Category::deleteAll();
+            Task::deleteAll();
         }
 
         function test_getName()
@@ -42,7 +44,7 @@
             $result = $test_Category->getId();
 
             //Assert
-            $this->assertEquals(1, $result);
+            $this->assertEquals($id, $result);
         }
 
         function test_setId()
@@ -131,6 +133,30 @@
 
             //Assert
             $this->assertEquals($test_Category, $result);
+        }
+
+        function testGetTasks()
+        {
+            $name = "Work stuff";
+            $id = null;
+            $test_category = new Category($name, $id);
+            $test_category->save();
+
+            $test_category_id = $test_category->getId();
+
+            $description = "Email client";
+            $test_task = new Task($description, $id, $test_category_id);
+            $test_task->save();
+
+            $description2 = "Meet with boss";
+            $test_task2 = new Task($description2, $id, $test_category_id);
+            $test_task2->save();
+
+            //Act
+            $result = $test_category->getTasks();
+
+            //Assert
+            $this->assertEquals([$test_task, $test_task2], $result);
         }
     }
 

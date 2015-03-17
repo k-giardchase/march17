@@ -16,6 +16,7 @@
         protected function tearDown()
         {
             Task::deleteAll();
+            Category::deleteAll();
         }
 
 
@@ -110,7 +111,7 @@
             $result = $test_task->getId();
 
             //Assert
-            $this->assertEquals(true, is_numeric($result));
+            $this->assertEquals(1, is_numeric($result));
         }
 
         function test_getCategoryId()
