@@ -10,6 +10,10 @@ This To Do List app will let you sort out your life by creating a to do list.
 
 ##Use and Editing
 To use the app, download the source code and run it in on your php server.
+You will need to create a psql database with the following tables and attributes:
+tasks- id serial PRIMARY KEY, description varchar, category_id int, due varchar.
+category - id serial PRIMARY KEY, name varchar.
+
 To edit the app, download the source code and open it in your text editor. <br />
     *Note: If you are copying any of the code to your own directories, you may need to install Composer
     in your root directory.*
