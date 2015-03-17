@@ -141,15 +141,16 @@
             $id = null;
             $test_category = new Category($name, $id);
             $test_category->save();
+            $due = '2014-09-09';
 
             $test_category_id = $test_category->getId();
 
             $description = "Email client";
-            $test_task = new Task($description, $id, $test_category_id);
+            $test_task = new Task($description, $test_category_id, $id, $due);
             $test_task->save();
 
             $description2 = "Meet with boss";
-            $test_task2 = new Task($description2, $id, $test_category_id);
+            $test_task2 = new Task($description2, $test_category_id, $id, $due);
             $test_task2->save();
 
             //Act
@@ -158,6 +159,8 @@
             //Assert
             $this->assertEquals([$test_task, $test_task2], $result);
         }
+
+
     }
 
  ?>

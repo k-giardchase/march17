@@ -5,14 +5,16 @@
         private $description;
         private $id;
         private $category_id;
+        private $due;
 
 // Construct the instance of the object
 
-        function __construct($description, $id = null, $category_id)
+        function __construct($description, $category_id, $id = null, $due)
         {
             $this->description = $description;
             $this->id = $id;
             $this->category_id = $category_id;
+            $this->due = $due;
         }
 
 // Create getters and setters for the private properties of the object
@@ -47,13 +49,23 @@
             $this->category_id = (int) $new_category_id;
         }
 
+        function getDue()
+        {
+            return $this->due;
+        }
+
+        function setDue($new_due)
+        {
+            $this->due = (string) $new_due;
+        }
+
 
 // Save function queries database and inserts new information into the database. The command returns
 // the id, which we set to the objects id property.
 
         function save()
         {
-            $statement = $GLOBALS['DB']->query("INSERT INTO tasks (description, category_id) VALUES ('{$this->getDescription()}', {$this->getCategoryId()}) RETURNING id;");
+            $statement = $GLOBALS['DB']->query("INSERT INTO tasks (description, category_id, due) VALUES ('{$this->getDescription()}', {$this->getCategoryId()}, '{$this->getDue()}') RETURNING id;");
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             $this->setId($result['id']);
         }
@@ -71,13 +83,14 @@
 
         static function getAll()
         {
-            $returned_tasks = $GLOBALS['DB']->query("SELECT * FROM tasks;");
+            $returned_tasks = $GLOBALS['DB']->query("SELECT * FROM tasks ORDER BY due;");
             $tasks = array();
             foreach($returned_tasks as $task){
                 $description = $task['description'];
                 $id = $task['id'];
                 $category_id = $task['category_id'];
-                $new_task = new Task($description, $id, $category_id);
+                $due = $task['due'];
+                $new_task = new Task($description, $category_id, $id, $due);
                 array_push($tasks, $new_task);
             }
 
