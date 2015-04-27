@@ -17,11 +17,9 @@
 
     $app->get("/", function() use ($app) {
         return $app['twig']->render('index.html.twig', array('categories' => Category::getAll()));
-
     });
 
     $app->get("/categories/{id}", function($id) use ($app) {
-
         $category = Category::find($id);
         return $app['twig']->render('category.html.twig', array('category' => $category, 'tasks' => $category->getTasks()));
     });
@@ -29,12 +27,10 @@
 // posts
 
     $app->post("/categories", function() use ($app) {
-
         $category = new Category($_POST['name']);
         $category->save();
 
         return $app['twig']->render('index.html.twig', array('categories' => Category::getAll()));
-
     });
 
     $app->post("/tasks", function() use ($app) {
@@ -48,9 +44,7 @@
     });
 
     $app->post("/delete_tasks", function() use ($app) {
-
-       Task::deleteAll();
-    //    $category = Category::find($category_id);
+        Task::deleteAll();
 
         return $app['twig']->render('index.html.twig', array('categories' => Category::getAll()));
     });

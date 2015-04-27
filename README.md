@@ -5,20 +5,39 @@ Connor Abdelnoor & Kyle Giard-Chase
 March 17 2015
 
 ##Description
-This To Do List app will let you sort out your life by creating a to do list.
+An app that allows a user to make a to-do list and assign tasks to categories.
 
+##Technologies Used
+PHP <br>
+<a href='http://www.postgresql.org/'>PostgreSQL</a> <br>
+<a href='https://developers.google.com/speed/libraries/'>jQuery</a> <br>
+<a href='http://getbootstrap.com/'>Bootstrap </a>for styling <br>
+It uses <a href='https://getcomposer.org/'>Composer</a> to install:
+<li>
+<a href='http://silex.sensiolabs.org/'>Silex</a>
+</li>
+<li><a href='http://twig.sensiolabs.org/'>Twig</a></li>
+<li><a href='https://phpunit.de/'>PHPUnit</a></li>
 
 ##Use and Editing
-To use the app, download the source code and run it in on your php server.
-You will need to create a psql database with the following tables and attributes:
-tasks- id serial PRIMARY KEY, description varchar, category_id int, due varchar.
-category - id serial PRIMARY KEY, name varchar.
+To view the app,<br>
+1. Open your command shell, and clone the repository using the command `git clone https://github.com/k-giardchase/march17.git`<br>
+2. Create a database using the instructions in the database section.
+3. In the top level of the project folder, run `composer install`<br>
+4. Start a php server by changing directories into the web folder `cd march17/web`
+and start your server `php -S localhost:8000`<br>
+5. Open your browser and navigate to your root path: `localhost:8000`
 
-To edit the app, download the source code and open it in your text editor. <br />
-    *Note: If you are copying any of the code to your own directories, you may need to install Composer
-    in your root directory.*
+##DATABASE
+```sql
+CREATE DATABASE to_do;
+ \c to_do;
+CREATE TABLE tasks (id serial PRIMARY KEY, description varchar, category_id int, due varchar);
+CREATE TABLE category (id serial PRIMARY KEY, name varchar);
+CREATE DATABASE to_do_test WITH TEMPLATE to_do;
+```
 
-##Copyright (c) 2015 Connor Abdelnoor
+##Copyright (c) 2015 Connor Abdelnoor & Kyle Giard-Chase
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights

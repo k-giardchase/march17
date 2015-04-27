@@ -70,16 +70,8 @@
             $this->setId($result['id']);
         }
 
-
-        // {
-        //     $statement = $GLOBALS['DB']->query("INSERT INTO tasks (description, category_id) VALUES  ('{$this->getDescription()}', {$this->getCategoryId()}) RETURNING id;");
-        //     $result = $statement->fetch(PDO::FETCH_ASSOC);
-        //     $this->setId($result['id']);
-        // }
-
 // getAll function queries database and returns the stored rows of data. We reformat that data
 // by storing values in $new_task. $new_task is then pushed into the array $tasks which holds our total tasks.
-
 
         static function getAll()
         {
